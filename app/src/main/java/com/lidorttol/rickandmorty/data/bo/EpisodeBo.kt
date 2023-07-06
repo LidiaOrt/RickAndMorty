@@ -5,7 +5,6 @@ data class EpisodeBo(
     val name: String? = null,
     val airDate: String? = null,
     val episode: String? = null,
-    val characters: ArrayList<String>? = null,
-    val url: String? = null,
+    val characters: ArrayList<CharacterBo>? = null,
     val created: String? = null
 )

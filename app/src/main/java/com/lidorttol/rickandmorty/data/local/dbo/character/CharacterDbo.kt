@@ -1,4 +1,4 @@
-package com.lidorttol.rickandmorty.data.local.dbo
+package com.lidorttol.rickandmorty.data.local.dbo.character
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -8,14 +8,14 @@ import com.google.gson.annotations.SerializedName
 data class CharacterDbo (
   @PrimaryKey
   @SerializedName("id")
-  val id: Int,
+  val characterId: Int,
   val name: String? = null,
   val status: String? = null,
   val species: String? = null,
   val type: String? = null,
   val gender: String? = null,
+  val origin: Int,
+  val location: Int,
   val image: String? = null,
-  val url: String? = null,
   val created: String? = null
 )
-// TODO("relations")

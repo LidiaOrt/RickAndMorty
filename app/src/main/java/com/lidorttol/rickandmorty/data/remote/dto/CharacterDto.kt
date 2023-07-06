@@ -22,7 +22,7 @@ data class CharacterDto (
   val gender: String? = null,
 
   @SerializedName("origin")
-  val origin: OriginDto? = null,
+  val origin: LocationDto? = null,
 
   @SerializedName("location")
   val location: LocationDto? = null,

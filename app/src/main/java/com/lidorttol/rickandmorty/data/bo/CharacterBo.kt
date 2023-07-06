@@ -7,10 +7,9 @@ data class CharacterBo(
   val species: String? = null,
   val type: String? = null,
   val gender: String? = null,
-  val origin: OriginBo? = null,
+  val origin: LocationBo? = null,
   val location: LocationBo? = null,
   val image: String? = null,
-  val episode: ArrayList<String>? = null,
-  val url: String? = null,
+  val episode: ArrayList<EpisodeBo>? = null,
   val created: String? = null
 )
