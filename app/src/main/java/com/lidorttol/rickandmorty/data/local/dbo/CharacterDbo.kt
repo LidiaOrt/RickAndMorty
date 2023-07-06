@@ -14,10 +14,8 @@ data class CharacterDbo (
   val species: String? = null,
   val type: String? = null,
   val gender: String? = null,
-  val origin: OriginDbo? = null,
-  val location: LocationDbo? = null,
   val image: String? = null,
-  val episode: ArrayList<String>? = null,
   val url: String? = null,
   val created: String? = null
 )
+// TODO("relations")
