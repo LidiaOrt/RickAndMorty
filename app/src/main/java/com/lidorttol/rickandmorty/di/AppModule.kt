@@ -10,7 +10,6 @@ import com.lidorttol.rickandmorty.data.local.LocalDatasourceImpl
 import com.lidorttol.rickandmorty.data.local.dao.CharacterDao
 import com.lidorttol.rickandmorty.data.local.dao.EpisodeDao
 import com.lidorttol.rickandmorty.data.local.dao.LocationDao
-import com.lidorttol.rickandmorty.data.local.dao.OriginDao
 import com.lidorttol.rickandmorty.data.local.database.AppDatabase
 import com.lidorttol.rickandmorty.data.remote.api.ApiService
 import com.lidorttol.rickandmorty.data.remote.api.RemoteDataSource
@@ -101,23 +100,15 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideOriginDao(database: AppDatabase): OriginDao {
-        return database.originDao()
-    }
-
-    @Provides
-    @Singleton
     fun proviceLocalDatasource(
         characterDao: CharacterDao,
         locationDao: LocationDao,
         episodeDao: EpisodeDao,
-        originDao: OriginDao
     ): LocalDatasource =
         LocalDatasourceImpl(
             characterDao,
             locationDao,
             episodeDao,
-            originDao,
         )
 
     @Singleton

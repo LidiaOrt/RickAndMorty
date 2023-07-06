@@ -1,6 +1,10 @@
 package com.lidorttol.rickandmorty.data.bo
 
 data class LocationBo (
-  val name: String? = null,
-  val url: String? = null
+  val id: Int,
+  val name: String,
+  val type: String? = null,
+  val dimension: String? = null,
+  val residents: List<CharacterBo>? = null,
+  val created: String? = null
 )
