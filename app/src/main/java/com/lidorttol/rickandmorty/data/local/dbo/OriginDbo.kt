@@ -11,3 +11,4 @@ data class OriginDbo (
   val name: String,
   val url: String? = null
 )
+// TODO("relations")
