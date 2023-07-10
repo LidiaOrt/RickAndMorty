@@ -17,7 +17,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
         loadFragment(
-            CharactersFragment.newInstance()
+            CharactersFragment.newInstance(),
+            addToBackStack = CharactersFragment::class.java.simpleName
         )
     }
 
@@ -26,15 +27,23 @@ class MainActivity : AppCompatActivity() {
         binding = null
     }
 
-    fun loadFragment(fragment: Fragment) {
+    fun loadFragment(fragment: Fragment, addToBackStack: String? = null) {
         binding?.let {
             supportFragmentManager
                 .beginTransaction()
                 .replace(
                     it.mainActivityContainerMain.id,
                     fragment
-                ).commit()
+                ).addToBackStack(addToBackStack)
+                .commit()
         }
+    }
 
+    override fun onBackPressed() {
+        if (supportFragmentManager.fragments[0] is CharactersFragment) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
     }
 }

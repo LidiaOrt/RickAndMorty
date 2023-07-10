@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.lidorttol.rickandmorty.data.bo.CharacterBo
 import com.lidorttol.rickandmorty.data.utils.EventAsyncResultObserver
 import com.lidorttol.rickandmorty.databinding.FragmentCharactersBinding
+import com.lidorttol.rickandmorty.ui.MainActivity
+import com.lidorttol.rickandmorty.ui.characterdetail.CharacterDetailFragment
 
 class CharactersFragment : Fragment() {
 
@@ -63,9 +65,17 @@ class CharactersFragment : Fragment() {
         viewModel.requestCharacters()
     }
 
-
     private fun setupList(items: List<CharacterBo>) {
-        val adapter = CharacterAdapter(items)
+        val onCharacterClickListener = object : CharacterAdapter.OnCharacterClickListener {
+            override fun onCharacterClick(id: Long) {
+                if (activity != null && activity is MainActivity) {
+                    (activity as MainActivity).loadFragment(
+                        CharacterDetailFragment.newInstance(id)
+                    )
+                }
+            }
+        }
+        val adapter = CharacterAdapter(items, onCharacterClickListener)
         binding?.charactersListCharacters?.adapter = adapter
     }
 
