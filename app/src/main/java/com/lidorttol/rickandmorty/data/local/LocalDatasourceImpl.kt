@@ -4,6 +4,7 @@ import com.lidorttol.rickandmorty.data.bo.CharacterBo
 import com.lidorttol.rickandmorty.data.local.dao.CharacterDao
 import com.lidorttol.rickandmorty.data.local.dao.EpisodeDao
 import com.lidorttol.rickandmorty.data.local.dao.LocationDao
+import com.lidorttol.rickandmorty.data.mapper.completeDboToBo
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -11,7 +12,7 @@ interface LocalDatasource {
 
     suspend fun cleanDataBase()
 
-    suspend fun getCharacters(): List<CharacterBo>
+    suspend fun getCharacters(): List<CharacterBo>?
 
     suspend fun getCharactersById(id: Int): CharacterBo
 
@@ -30,8 +31,8 @@ class LocalDatasourceImpl @Inject constructor(
          episodeDao.cleanEpisodes()
      }
 
-    override suspend fun getCharacters(): List<CharacterBo> {
-        TODO("Not yet implemented")
+    override suspend fun getCharacters(): List<CharacterBo>? {
+        return characterDao.getCharacters().map { it.completeDboToBo() }
     }
 
     override suspend fun getCharactersById(id: Int): CharacterBo {

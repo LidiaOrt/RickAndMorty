@@ -7,10 +7,10 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "episode")
 data class EpisodeDbo(
   @PrimaryKey
-  @SerializedName("id")
-  val episodeId: Int,
+  val episodeId: Long,
   val name: String? = null,
   val airDate: String? = null,
   val episode: String? = null,
+  val url: String,
   val created: String? = null
 )
