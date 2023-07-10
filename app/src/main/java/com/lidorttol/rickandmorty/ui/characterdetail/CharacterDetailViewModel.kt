@@ -1,4 +1,4 @@
-package com.lidorttol.rickandmorty.ui.characters
+package com.lidorttol.rickandmorty.ui.characterdetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.lidorttol.rickandmorty.data.bo.CharacterBo
 import com.lidorttol.rickandmorty.data.utils.AsyncResult
 import com.lidorttol.rickandmorty.data.utils.Event
+import com.lidorttol.rickandmorty.domain.GetCharacterByIdUseCase
 import com.lidorttol.rickandmorty.domain.GetCharactersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -14,18 +15,18 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CharactersViewModel @Inject constructor(
-    private val getCharactersUseCase: GetCharactersUseCase,
+class CharacterDetailViewModel @Inject constructor(
+    private val getCharacterByIdUseCase: GetCharacterByIdUseCase
 ) : ViewModel() {
 
-    private val charactersLiveData = MutableLiveData<Event<AsyncResult<List<CharacterBo>?>>>()
+    private val characterLiveData = MutableLiveData<Event<AsyncResult<CharacterBo?>>>()
 
-    fun getCharacters(): LiveData<Event<AsyncResult<List<CharacterBo>?>>> = charactersLiveData
+    fun getCharacter(): LiveData<Event<AsyncResult<CharacterBo?>>> = characterLiveData
 
-    fun requestCharacters() {
+    fun requestCharacterById(id: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            getCharactersUseCase().collect {
-                charactersLiveData.postValue(it)
+            getCharacterByIdUseCase(id).collect {
+                characterLiveData.postValue(it)
             }
         }
     }
