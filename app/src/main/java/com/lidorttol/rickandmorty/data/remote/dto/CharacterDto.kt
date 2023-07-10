@@ -1,10 +1,11 @@
 package com.lidorttol.rickandmorty.data.remote.dto
 
+import android.util.Log
 import com.google.gson.annotations.SerializedName
 
 data class CharacterDto (
   @SerializedName("id")
-  val id: Int,
+  val id: Long? = null,
 
   @SerializedName("name")
   val name: String? = null,
@@ -31,11 +32,20 @@ data class CharacterDto (
   val image: String? = null,
 
   @SerializedName("episode")
-  val episode: ArrayList<String>? = null,
+  val episodes: List<String>? = null,
 
   @SerializedName("url")
   val url: String? = null,
 
   @SerializedName("created")
   val created: String? = null
-)
+) {
+
+  fun extractIdFromUrl() = try {
+      url?.split("/")?.last()?.toLong() ?: -1L
+  } catch (e: Exception) {
+    Log.e("Error extracting id from CharacterDto url: -> ", e.toString())
+    -1L
+  }
+
+}

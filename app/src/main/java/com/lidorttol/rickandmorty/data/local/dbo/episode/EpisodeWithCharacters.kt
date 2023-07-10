@@ -6,8 +6,9 @@ import androidx.room.Relation
 import com.lidorttol.rickandmorty.data.local.dbo.character.CharacterDbo
 import com.lidorttol.rickandmorty.data.local.dbo.character.CharacterEpisodeCrossRef
 
-data class EpisodesWithCharacter(
-    @Embedded val episode: EpisodeDbo,
+data class EpisodeWithCharacters(
+    @Embedded
+    val episode: EpisodeDbo,
     @Relation(
         parentColumn = "episodeId",
         entityColumn = "characterId",

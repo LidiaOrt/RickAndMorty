@@ -5,8 +5,8 @@ import com.lidorttol.rickandmorty.data.response.RepositoryResponse
 
 interface Repository {
 
-    suspend fun getCharacters(resetDatabase: Boolean): RepositoryResponse<List<CharacterBo>>
+    suspend fun getCharacters(): RepositoryResponse<List<CharacterBo>?>
 
-    suspend fun getCharacterDetail(id: Int): RepositoryResponse<CharacterBo>
+    suspend fun getCharacterDetail(id: Long): RepositoryResponse<CharacterBo?>
 
 }

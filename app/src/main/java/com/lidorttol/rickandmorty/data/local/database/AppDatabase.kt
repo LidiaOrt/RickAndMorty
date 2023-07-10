@@ -6,6 +6,7 @@ import com.lidorttol.rickandmorty.data.local.dao.CharacterDao
 import com.lidorttol.rickandmorty.data.local.dao.EpisodeDao
 import com.lidorttol.rickandmorty.data.local.dao.LocationDao
 import com.lidorttol.rickandmorty.data.local.dbo.character.CharacterDbo
+import com.lidorttol.rickandmorty.data.local.dbo.character.CharacterEpisodeCrossRef
 import com.lidorttol.rickandmorty.data.local.dbo.episode.EpisodeDbo
 import com.lidorttol.rickandmorty.data.local.dbo.location.LocationDbo
 
@@ -14,6 +15,7 @@ import com.lidorttol.rickandmorty.data.local.dbo.location.LocationDbo
         CharacterDbo::class,
         LocationDbo::class,
         EpisodeDbo::class,
+        CharacterEpisodeCrossRef::class,
     ],
     version = 1
 )

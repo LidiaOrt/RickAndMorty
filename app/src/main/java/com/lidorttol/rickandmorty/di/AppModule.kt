@@ -16,6 +16,10 @@ import com.lidorttol.rickandmorty.data.remote.api.RemoteDataSource
 import com.lidorttol.rickandmorty.data.remote.api.RemoteDataSourceImpl
 import com.lidorttol.rickandmorty.data.repository.Repository
 import com.lidorttol.rickandmorty.data.repository.RepositoryImpl
+import com.lidorttol.rickandmorty.domain.GetCharacterByIdUseCase
+import com.lidorttol.rickandmorty.domain.GetCharacterByIdUseCaseImpl
+import com.lidorttol.rickandmorty.domain.GetCharactersUseCase
+import com.lidorttol.rickandmorty.domain.GetCharactersUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,7 +38,7 @@ object AppModule {
     lateinit var database: AppDatabase
 
     @Provides
-    fun provideBaseUrl() = "https://rickandmortyapi.com/api"
+    fun provideBaseUrl() = "https://rickandmortyapi.com/api/"
 
     @Singleton
     @Provides
@@ -116,8 +120,19 @@ object AppModule {
     fun provideRepository(
         localDataSource: LocalDatasource,
         remoteDataSource: RemoteDataSource,
-    ) =
-        RepositoryImpl(localDataSource, remoteDataSource) as Repository
+    ) = RepositoryImpl(localDataSource, remoteDataSource) as Repository
+
+    @Singleton
+    @Provides
+    fun provideGetCharactersUseCase(
+        repository: Repository
+    ) = GetCharactersUseCaseImpl(repository) as GetCharactersUseCase
+
+    @Singleton
+    @Provides
+    fun provideGetCharacterByIdUseCase(
+        repository: Repository
+    ) = GetCharacterByIdUseCaseImpl(repository) as GetCharacterByIdUseCase
 
 
 }
