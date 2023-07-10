@@ -25,18 +25,37 @@ class RepositoryImpl @Inject constructor(
             }
 
             override suspend fun saveRemoteResponse(remoteResponse: List<CharacterBo>?) {
-                // no-op
+                // localDatasource.saveCharacters(remoteResponse)
             }
 
             override fun shouldRequestFromRemote(localResponse: List<CharacterBo>?): Boolean {
+                // return localResponse.isNullOrEmpty()
                 return true
             }
 
         }.build()
     }
 
-    override suspend fun getCharacterDetail(id: Int): RepositoryResponse<CharacterBo> {
-        TODO("Not yet implemented")
+    override suspend fun getCharacterDetail(id: Long): RepositoryResponse<CharacterBo?> {
+        return object: CacheableRemoteResponse<CharacterBo?>() {
+            override suspend fun loadFromLocal(): CharacterBo? {
+                return localDatasource.getCharactersById(id)
+            }
+
+            override suspend fun requestRemoteCall(): CharacterBo? {
+                return remoteDataSource.getCharacterById(id)
+            }
+
+            override suspend fun saveRemoteResponse(remoteResponse: CharacterBo?) {
+                // localDatasource.saveCharacters(remoteResponse)
+            }
+
+            override fun shouldRequestFromRemote(localResponse: CharacterBo?): Boolean {
+                // return localResponse.isNullOrEmpty()
+                return true
+            }
+
+        }.build()
     }
 
 }

@@ -7,6 +7,6 @@ interface Repository {
 
     suspend fun getCharacters(): RepositoryResponse<List<CharacterBo>?>
 
-    suspend fun getCharacterDetail(id: Int): RepositoryResponse<CharacterBo>
+    suspend fun getCharacterDetail(id: Long): RepositoryResponse<CharacterBo?>
 
 }

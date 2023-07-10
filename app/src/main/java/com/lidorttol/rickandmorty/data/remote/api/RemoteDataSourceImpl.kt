@@ -12,4 +12,8 @@ class RemoteDataSourceImpl @Inject constructor(
         return apiService.getCharacters().result?.map { it.dtoToBo() }
     }
 
+    override suspend fun getCharacterById(id: Long): CharacterBo? {
+        return apiService.getCharacterById(id).dtoToBo()
+    }
+
 }

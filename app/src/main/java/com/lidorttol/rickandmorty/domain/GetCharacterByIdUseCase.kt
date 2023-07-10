@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 interface GetCharacterByIdUseCase {
-    suspend operator fun invoke(characterId: Int): Flow<Event<AsyncResult<CharacterBo>>>
+    suspend operator fun invoke(characterId: Long): Flow<Event<AsyncResult<CharacterBo?>>>
 }
 
 class GetCharacterByIdUseCaseImpl @Inject constructor(private val repository: Repository) :
     GetCharacterByIdUseCase {
 
-    override suspend fun invoke(characterId: Int): Flow<Event<AsyncResult<CharacterBo>>> {
+    override suspend fun invoke(characterId: Long): Flow<Event<AsyncResult<CharacterBo?>>> {
         return repository.getCharacterDetail(characterId).flow().map { Event(it) }
     }
 

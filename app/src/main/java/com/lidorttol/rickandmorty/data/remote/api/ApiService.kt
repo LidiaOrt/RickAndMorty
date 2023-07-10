@@ -14,6 +14,6 @@ interface ApiService {
     suspend fun getCharacters(): CharacterRemoteResponseDto<CharacterDto>
 
     @GET("character/{id}")
-    suspend fun getCharacterById(@Path("id") id: Int) : CharacterDto
+    suspend fun getCharacterById(@Path("id") id: Long) : CharacterDto
 
 }

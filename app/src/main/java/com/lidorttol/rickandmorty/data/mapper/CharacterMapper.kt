@@ -5,6 +5,7 @@ import com.lidorttol.rickandmorty.data.bo.CharacterBo
 import com.lidorttol.rickandmorty.data.bo.EpisodeBo
 import com.lidorttol.rickandmorty.data.local.dbo.character.CharacterAndOriginAndLocationWithEpisodes
 import com.lidorttol.rickandmorty.data.local.dbo.character.CharacterDbo
+import com.lidorttol.rickandmorty.data.local.dbo.location.LocationDbo
 import com.lidorttol.rickandmorty.data.remote.dto.CharacterDto
 
 
@@ -56,7 +57,6 @@ fun CharacterAndOriginAndLocationWithEpisodes.completeDboToBo() = CharacterBo(
     character.created
 )
 
-/*
 fun CharacterBo.boToCompleteDbo(): CharacterAndOriginAndLocationWithEpisodes = CharacterAndOriginAndLocationWithEpisodes(
     CharacterDbo(
         id,
@@ -66,14 +66,15 @@ fun CharacterBo.boToCompleteDbo(): CharacterAndOriginAndLocationWithEpisodes = C
         type,
         gender,
         image,
-        origin?.id,
-        location?.id,
+        origin?.url?.let { extractIdFromUrl(it) },
+        location?.url?.let { extractIdFromUrl(it) },
         url,
         created
     ),
-    origin =
+    origin = origin?.boToDbo(),
+    location = location?.boToDbo(),
+    episodes = episodes?.map { it.boToDbo() }
 )
-*/
 
 
 

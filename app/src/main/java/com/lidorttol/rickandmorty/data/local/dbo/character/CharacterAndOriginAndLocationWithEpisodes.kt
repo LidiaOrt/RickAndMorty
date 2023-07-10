@@ -20,6 +20,7 @@ data class CharacterAndOriginAndLocationWithEpisodes(
     )
     val location: LocationDbo? = null,
     @Relation(
+        entity = EpisodeDbo::class,
         parentColumn = "characterId",
         entityColumn = "episodeId",
         associateBy = Junction(CharacterEpisodeCrossRef::class)
